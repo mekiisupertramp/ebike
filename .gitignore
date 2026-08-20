@@ -53,3 +53,19 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+
+
+.ccsproject
+.clangd
+.cproject
+.jxbrowser.userdata
+.launches
+.project
+.settings
+.theia
+.xdchelp
+.DS_Store
+
+/Debug
+/Release
