@@ -1,0 +1,295 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "CC2642R1FRGZ" --package "RGZ" --part "Default" --product "simplelink_cc13x2_26x2_sdk@5.20.00.52"
+ * @versions {"data":"2021060817","timestamp":"2021060817","tool":"1.8.2+1992","templates":null}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const ble         = scripting.addModule("/ti/ble5stack/ble");
+const CCFG        = scripting.addModule("/ti/devices/CCFG");
+const rfdesign    = scripting.addModule("/ti/devices/radioconfig/rfdesign");
+const Display     = scripting.addModule("/ti/display/Display");
+const Display1    = Display.addInstance();
+const AESCCM      = scripting.addModule("/ti/drivers/AESCCM");
+const AESCCM1     = AESCCM.addInstance();
+const AESCTRDRBG  = scripting.addModule("/ti/drivers/AESCTRDRBG");
+const AESCTRDRBG1 = AESCTRDRBG.addInstance();
+const AESECB      = scripting.addModule("/ti/drivers/AESECB");
+const AESECB1     = AESECB.addInstance();
+const Board       = scripting.addModule("/ti/drivers/Board");
+const ECDH        = scripting.addModule("/ti/drivers/ECDH");
+const ECDH1       = ECDH.addInstance();
+const GPIO        = scripting.addModule("/ti/drivers/GPIO");
+const GPIO1       = GPIO.addInstance();
+const GPIO2       = GPIO.addInstance();
+const GPIO3       = GPIO.addInstance();
+const GPIO4       = GPIO.addInstance();
+const GPIO5       = GPIO.addInstance();
+const GPIO6       = GPIO.addInstance();
+const GPIO7       = GPIO.addInstance();
+const GPIO8       = GPIO.addInstance();
+const GPIO9       = GPIO.addInstance();
+const GPIO10      = GPIO.addInstance();
+const GPIO11      = GPIO.addInstance();
+const GPIO12      = GPIO.addInstance();
+const GPIO13      = GPIO.addInstance();
+const GPIO14      = GPIO.addInstance();
+const GPIO15      = GPIO.addInstance();
+const GPIO16      = GPIO.addInstance();
+const GPIO17      = GPIO.addInstance();
+const GPIO18      = GPIO.addInstance();
+const GPIO19      = GPIO.addInstance();
+const GPIO20      = GPIO.addInstance();
+const GPIO21      = GPIO.addInstance();
+const NVS         = scripting.addModule("/ti/drivers/NVS");
+const NVS1        = NVS.addInstance();
+const NVS2        = NVS.addInstance();
+const NVS3        = NVS.addInstance();
+const NVS4        = NVS.addInstance();
+const NVS5        = NVS.addInstance();
+const Power       = scripting.addModule("/ti/drivers/Power");
+const RF          = scripting.addModule("/ti/drivers/RF");
+const RTOS        = scripting.addModule("/ti/drivers/RTOS");
+const SPI         = scripting.addModule("/ti/drivers/SPI", {}, false);
+const SPI1        = SPI.addInstance();
+const SPI2        = SPI.addInstance();
+const TRNG        = scripting.addModule("/ti/drivers/TRNG");
+const TRNG1       = TRNG.addInstance();
+const Timer       = scripting.addModule("/ti/drivers/Timer", {}, false);
+const Timer1      = Timer.addInstance();
+const Timer2      = Timer.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+ble.addressMode                                 = "ADDRMODE_PUBLIC";
+ble.defaultTxPower                              = "HCI_EXT_TX_POWER_5_DBM";
+ble.secureConn                                  = "GAPBOND_SECURE_CONNECTION_ONLY";
+ble.allowDebugKeys                              = false;
+ble.authenPairingOnly                           = true;
+ble.maxPDUSize                                  = 255;
+ble.powerMamagement                             = false;
+ble.maxNumEntIcall                              = 12;
+ble.maxNumIcallEnabledTasks                     = 10;
+ble.paramUpdateReq                              = "GAP_UPDATE_REQ_ACCEPT_ALL";
+ble.deviceRole                                  = "PERIPHERAL_CFG+OBSERVER_CFG";
+ble.deviceName                                  = "Motosacoche";
+ble.radioConfig.codeExportConfig.$name          = "ti_devices_radioconfig_code_export_param0";
+ble.connUpdateParamsPeripheral.$name            = "ti_ble5stack_general_ble_conn_update_params0";
+ble.connUpdateParamsPeripheral.paramUpdateDelay = 1000;
+ble.connUpdateParamsPeripheral.reqMinConnInt    = 15;
+ble.connUpdateParamsPeripheral.reqMaxConnInt    = 15;
+ble.advSet1.$name                               = "ti_ble5stack_broadcaster_advertisement_set0";
+ble.advSet1.advParam1.$name                     = "ti_ble5stack_broadcaster_advertisement_params0";
+ble.advSet1.advData1.$name                      = "ti_ble5stack_broadcaster_advertisement_data0";
+ble.advSet1.scanRes1.$name                      = "ti_ble5stack_broadcaster_advertisement_data1";
+ble.advSet2.$name                               = "ti_ble5stack_broadcaster_advertisement_set1";
+ble.advSet2.advParam2.$name                     = "ti_ble5stack_broadcaster_advertisement_params1";
+ble.advSet2.advData2.$name                      = "ti_ble5stack_broadcaster_advertisement_data2";
+ble.advSet2.scanRes2.$name                      = "ti_ble5stack_broadcaster_advertisement_data3";
+
+CCFG.tcxoType           = "Clipped-sine Type";
+CCFG.ccfgTemplate.$name = "ti_devices_CCFGTemplate0";
+
+Display1.$name                             = "CONFIG_Display_0";
+Display1.enableANSI                        = true;
+Display1.uartBufferSize                    = 128;
+Display1.uart.$name                        = "PIXXI_UART";
+Display1.uart.rxInterruptFifoThreshold     = "1/8";
+Display1.uart.uart.$assign                 = "UART1";
+Display1.uart.txPinInstance.outputState    = "High";
+Display1.uart.txPinInstance.$name          = "CONFIG_PIN_UART_TX";
+Display1.uart.txPinInstance.outputStrength = "Maximum";
+Display1.uart.rxPinInstance.$name          = "CONFIG_PIN_UART_RX";
+Display1.uart.rxPinInstance.pull           = "None";
+
+AESCCM1.$name = "CONFIG_AESCCM0";
+
+AESCTRDRBG1.$name              = "CONFIG_AESCTRDRBG_0";
+AESCTRDRBG1.aesctrObject.$name = "CONFIG_AESCTR_0";
+
+AESECB1.$name = "CONFIG_AESECB0";
+
+Board.generateInitializationFunctions = false;
+
+ECDH1.$name = "CONFIG_ECDH0";
+
+GPIO1.$name              = "LCD_RST";
+GPIO1.mode               = "Output";
+GPIO1.initialOutputState = "High";
+GPIO1.gpioPin.$assign    = "41";
+GPIO1.pinInstance.$name  = "CONFIG_PIN_3";
+
+GPIO2.$name                      = "LED";
+GPIO2.mode                       = "Output";
+GPIO2.gpioPin.$assign            = "31";
+GPIO2.pinInstance.$name          = "CONFIG_PIN_4";
+GPIO2.pinInstance.outputStrength = "Maximum";
+
+GPIO3.$name             = "MCP2515_nRst";
+GPIO3.mode              = "Output";
+GPIO3.gpioPin.$assign   = "38";
+GPIO3.pinInstance.$name = "CONFIG_PIN_0";
+
+GPIO4.$name              = "MCP2515_nEN";
+GPIO4.mode               = "Output";
+GPIO4.initialOutputState = "High";
+GPIO4.gpioPin.$assign    = "21";
+GPIO4.pinInstance.$name  = "CONFIG_PIN_13";
+
+GPIO5.$name             = "KEY";
+GPIO5.pull              = "Pull Down";
+GPIO5.gpioPin.$assign   = "37";
+GPIO5.pinInstance.$name = "CONFIG_PIN_18";
+
+GPIO6.$name              = "FLASH_nHOLD";
+GPIO6.mode               = "Output";
+GPIO6.initialOutputState = "High";
+GPIO6.gpioPin.$assign    = "29";
+GPIO6.pinInstance.$name  = "CONFIG_PIN_23";
+
+GPIO7.$name              = "FLASH_nWP";
+GPIO7.mode               = "Output";
+GPIO7.initialOutputState = "High";
+GPIO7.pinInstance.$name  = "CONFIG_PIN_24";
+
+GPIO8.mode              = "Output";
+GPIO8.$name             = "DCDC_LOW_POWER";
+GPIO8.gpioPin.$assign   = "7";
+GPIO8.pinInstance.$name = "CONFIG_PIN_25";
+
+GPIO9.$name             = "CONFIG_HORN";
+GPIO9.gpioPin.$assign   = "8";
+GPIO9.pinInstance.$name = "CONFIG_PIN_17";
+
+GPIO10.$name             = "CONFIG_RIGHT_BLINK";
+GPIO10.gpioPin.$assign   = "9";
+GPIO10.pinInstance.$name = "CONFIG_PIN_15";
+
+GPIO11.$name             = "CONFIG_BTN_HELP";
+GPIO11.interruptTrigger  = "Rising Edge";
+GPIO11.callbackFunction  = "gpios_callback";
+GPIO11.gpioPin.$assign   = "10";
+GPIO11.pinInstance.$name = "CONFIG_PIN_9";
+
+GPIO12.$name             = "CONFIG_BTN_SCREEN";
+GPIO12.callbackFunction  = "gpios_callback";
+GPIO12.interruptTrigger  = "Rising Edge";
+GPIO12.gpioPin.$assign   = "11";
+GPIO12.pinInstance.$name = "CONFIG_PIN_8";
+
+GPIO13.$name              = "CONFIG_5V_P_EN";
+GPIO13.mode               = "Output";
+GPIO13.initialOutputState = "High";
+GPIO13.gpioPin.$assign    = "12";
+GPIO13.pinInstance.$name  = "CONFIG_PIN_16";
+
+GPIO14.$name             = "CONFIG_BTN_LIGHTS";
+GPIO14.callbackFunction  = "";
+GPIO14.gpioPin.$assign   = "36";
+GPIO14.pinInstance.$name = "CONFIG_PIN_5";
+
+GPIO15.$name             = "CONFIG_GPIO_0";
+GPIO15.mode              = "Output";
+GPIO15.gpioPin.$assign   = "39";
+GPIO15.pinInstance.$name = "CONFIG_PIN_26";
+
+GPIO16.$name             = "CONFIG_LEFT_BLINK";
+GPIO16.gpioPin.$assign   = "28";
+GPIO16.pinInstance.$name = "CONFIG_PIN_14";
+
+GPIO17.interruptTrigger  = "Falling Edge";
+GPIO17.$name             = "MCP2515_nINT";
+GPIO17.gpioPin.$assign   = "32";
+GPIO17.pinInstance.$name = "CONFIG_PIN_6";
+
+GPIO18.$name             = "CONFIG_3V3_P_nEN";
+GPIO18.mode              = "Output";
+GPIO18.gpioPin.$assign   = "40";
+GPIO18.pinInstance.$name = "CONFIG_PIN_7";
+
+GPIO19.$name              = "FLASH_nCS";
+GPIO19.mode               = "Output";
+GPIO19.initialOutputState = "High";
+GPIO19.gpioPin.$assign    = "17";
+GPIO19.pinInstance.$name  = "CONFIG_PIN_19";
+
+GPIO20.$name             = "BRAKE_L";
+GPIO20.callbackFunction  = "";
+GPIO20.gpioPin.$assign   = "42";
+GPIO20.pinInstance.$name = "CONFIG_PIN_1";
+GPIO20.pinInstance.irq   = "Both Edges";
+
+GPIO21.$name             = "BRAKE_R";
+GPIO21.callbackFunction  = "";
+GPIO21.gpioPin.$assign   = "43";
+GPIO21.pinInstance.$name = "CONFIG_PIN_2";
+GPIO21.pinInstance.irq   = "Both Edges";
+
+NVS1.$name                    = "CONFIG_NVS_BLE";
+NVS1.internalFlash.$name      = "ti_drivers_nvs_NVSCC26XX0";
+NVS1.internalFlash.regionBase = 0x3E000;
+NVS1.internalFlash.regionSize = 0x4000;
+
+NVS2.$name                    = "CONFIG_NVS_KM";
+NVS2.internalFlash.$name      = "ti_drivers_nvs_NVSCC26XX1";
+NVS2.internalFlash.regionBase = 0x42000;
+
+NVS3.$name                    = "CONFIG_NVS_CONFIG";
+NVS3.internalFlash.$name      = "ti_drivers_nvs_NVSCC26XX2";
+NVS3.internalFlash.regionBase = 0x44000;
+
+NVS4.$name                    = "CONFIG_NVS_TRIPA";
+NVS4.internalFlash.$name      = "ti_drivers_nvs_NVSCC26XX3";
+NVS4.internalFlash.regionBase = 0x46000;
+
+NVS5.$name                    = "CONFIG_NVS_TRIPB";
+NVS5.internalFlash.$name      = "ti_drivers_nvs_NVSCC26XX4";
+NVS5.internalFlash.regionBase = 0x48000;
+
+SPI1.$name                       = "CONFIG_SPI_0";
+SPI1.defaultTxBufferValue        = "0xFF";
+SPI1.spi.$assign                 = "SSI0";
+SPI1.spi.sclkPin.$assign         = "20";
+SPI1.spi.misoPin.$assign         = "18";
+SPI1.spi.mosiPin.$assign         = "19";
+SPI1.spi.dmaRxChannel.$assign    = "DMA_CH3";
+SPI1.spi.dmaTxChannel.$assign    = "DMA_CH4";
+SPI1.sclkPinInstance.$name       = "CONFIG_PIN_10";
+SPI1.misoPinInstance.$name       = "CONFIG_PIN_11";
+SPI1.misoPinInstance.pull        = "Pull Up";
+SPI1.mosiPinInstance.$name       = "CONFIG_PIN_12";
+SPI1.mosiPinInstance.outputState = "High";
+
+SPI2.$name                 = "CONFIG_SPI_FLASH";
+SPI2.spi.sclkPin.$assign   = "16";
+SPI2.spi.misoPin.$assign   = "14";
+SPI2.spi.mosiPin.$assign   = "15";
+SPI2.sclkPinInstance.$name = "CONFIG_PIN_20";
+SPI2.misoPinInstance.$name = "CONFIG_PIN_21";
+SPI2.mosiPinInstance.$name = "CONFIG_PIN_22";
+
+TRNG1.$name = "CONFIG_TRNG_0";
+
+Timer1.$name               = "CONFIG_TIMER_0";
+Timer1.timerInstance.$name = "CONFIG_GPTIMER_0";
+
+Timer2.$name                       = "CONFIG_TIMER_1";
+Timer2.timerInstance.$name         = "CONFIG_GPTIMER_1";
+Timer2.timerInstance.timer.$assign = "GPTM1";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+Display1.uart.uart.txPin.$suggestSolution   = "6";
+Display1.uart.uart.rxPin.$suggestSolution   = "5";
+GPIO7.gpioPin.$suggestSolution              = "26";
+SPI2.spi.$suggestSolution                   = "SSI1";
+SPI2.spi.dmaRxChannel.$suggestSolution      = "DMA_CH16";
+SPI2.spi.dmaTxChannel.$suggestSolution      = "DMA_CH17";
+Timer1.timerInstance.timer.$suggestSolution = "GPTM1";

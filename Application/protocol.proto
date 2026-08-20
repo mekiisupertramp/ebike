@@ -1,0 +1,76 @@
+// You should run ./generated-protobuf.sh when touching this file, so that the Dart code is generated
+// and reloaded by the IDE.
+
+syntax = "proto2";
+
+package mtsc;
+
+enum Weather {
+  WE_SUN = 0;
+  WE_RAIN = 1;
+  WE_SNOW = 2;
+  WE_STORM = 3;
+}
+
+enum AssistModes {
+  AM_NORMAL = 0;
+  AM_SPORT = 1;
+  AM_ECO = 2;
+}
+
+message Config {
+  optional string bikeName = 1; // name shown at the starting on the bike (max 10 chars)
+  optional string bikeNameBLE = 2; // name on bluetooth max 11char + \0
+  optional string vin = 3;  // bike's vin number
+  optional string idRFID1 = 4; // RFID badge, usefull for setting it through BLE
+  optional string idRFID2 = 5; // RFID badge, usefull for setting it through BLE
+  optional string idRFID3 = 6; // RFID badge, usefull for setting it through BLE
+  optional string idRFID4 = 7; // RFID badge, usefull for setting it through BLE
+  optional string ccid = 8; // CCID of the eSIM of Trac'y module
+
+  // braking force
+  optional float brakingForce = 9; // deprecated, use brakeCurrent instead
+  optional bool brakingTrigger = 10; // if true, each brake = 50% of braking force, if false always 100% of braking force 
+
+  optional uint32 testmode = 11; // if necessary, could help for debug 
+
+  // drive-train parameters, must be hidden from user
+  optional float currentTrig = 12; // percentage of current at which the motor starts spinning
+  optional float torkCoeff = 13; // tork proportional coefficient of the PID controller
+  optional float torkIntCoeff = 14; // tork integral coefficient of the PID controller  
+  optional float speedCoeff = 15; // speed proportional coefficient of the PID controller
+  optional float ecoCurrent = 16; // maximum current for eco mode (percentage of the maximum current)
+  optional float brakeCurrent = 17; // the regen current in amps
+  optional float ecoTorkSlope = 18; // the slope of the eco mode 
+  optional float normTorkSlope = 19; // the slope of the normal mode 
+  optional float sporTorkSlope = 20; // the slope of the sport mode 
+  optional float maxCurrent = 21; // maximum current used for tork sensor's accuracy (max current limited in VESC!)
+  optional float speedMultiplier = 22; // the speed multiplier 
+  optional float tripMultiplier = 23; // the trip multiplier 
+  optional uint32 brakingState = 24;  // set it to 1 if brakes are normally open, to 0 if normally closed
+  optional float currPercDegraded = 25;	// % of authorized current when degraded mode 
+  optional float tempStartDegraded = 26; // temperature at which the degraded mode is effectif
+  optional float tempStopDegraded = 27;	// temperature at which the degraded mode turns off
+  optional float temperatureEmergency = 28; // temperature at which we stop spining the motor
+  optional float degrTorkEcoSlope = 29;
+  optional float degrTorkNormSlope = 30;
+  optional float degrTorkSportSlope = 31;
+  optional float degrMaxCurrent = 32;
+  optional float degrCurrTrig = 33;
+  optional float betaFactor = 34;
+  optional bool resetConfig = 35;
+  	// factor which set minimum current when hitting the temperatureEmergency value ( 1 - (temp-tempStartDegraded) / betaFactor*(temperatureEmergency-tempStartDegraded))
+}
+
+message Datas {
+  optional bool powerMode = 1;   // if the bike is ON (true) or OFF (false)
+  optional AssistModes assistMode = 2;    // assistance modes: Normal, Sport or Eco
+  optional uint32 minutes = 3;
+  optional uint32 hours = 4; 
+  optional Weather weath = 5; 
+  optional double odo = 6; // the odometer in km
+  optional double tripA = 7; // the trip A in km
+  optional double tripB = 8; // the trip B in km
+  optional uint32 soc = 9; // state of charge from 0 to 100 %
+  optional uint32 erpm = 10; // erpm can be set with specific testmode (only used for testing)
+}

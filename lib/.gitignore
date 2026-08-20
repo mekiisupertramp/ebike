@@ -1,0 +1,14 @@
+.metadata
+.jxbrowser-data
+.launches
+.settings
+
+Debug
+
+*.obj
+*.o
+*.out
+
+.DS_Store
+
+Screen/PixxiLCD/test1*

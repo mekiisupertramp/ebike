@@ -1,0 +1,105 @@
+// You should run ./generated-protobuf.sh when touching this file, so that the Dart code is generated
+// and reloaded by the IDE.
+
+syntax = "proto2";
+
+package mtsc;
+
+enum KeyMode {
+  KM_UNKNOWN = 0;
+  KM_KEY_ONLY = 1;
+  KM_KEY_OR_BLE = 2;
+  KM_BLE_ONLY = 3;
+  KM_KEY_AND_BLE = 4;
+  KM_KEY_BLE_FOR_START = 5;
+  KM_BLE_ONLY_NO_TIMEOUT = 6;
+}
+
+enum PedalingHardnessLevel {
+  PH_UNKNOWN = 0;
+  PH_LOW = 1;
+  PH_STANDARD = 2;
+  PH_HIGH = 3;
+}
+
+enum BrakingForceLevel {
+  BF_UNKNOWN = 0;
+  BF_LOW = 1;
+  BF_STANDARD = 2;
+  BF_HIGH = 3;
+}
+
+message WriteConfig {
+  required uint32 code = 1;//0xe6b96fa4==admin 0x9359b73d=user
+  optional Config config = 2;
+}
+
+message Config {
+  optional uint32 erpmToSpeed = 1; //reduction ratio
+  optional uint32 bikeNumber = 2; //[0,2^32-1]for internal use
+  optional string bikeName = 3; //name on bluetooth max 11char + \0
+  optional uint32 maneuvreForwardSpeed10 = 4; //[10,50] max speed for forward button 50=5km/h
+  optional uint32 maneuvreBackwardSpeed10 = 5; //[10,50] max speed for backward button 50=5km/h
+  optional uint32 maxCurrent = 6; //[20,100] //max current in motor
+  optional uint32 regenSpeedToCurrent10000 = 7; // [10,60] smale value request to pedal fast for runing motor at hight power / hight value run motor at hight power when we pedal slow
+  optional uint32 minRegenSpeed = 8; //[0,50]minimum pedal speed for start motor
+  optional uint32 decreasCurrentWithSpeed1000 = 9; //[0,60] at 0 motor current no change with speed >0 motor current reduct with speed more easy to drive slow
+  optional uint32 powCurrent100 = 10; //[50,200] 100= current in motor is linear with pedal speed > 100 is exponential. 120 => current = pedal speed^1.2
+
+  // braking force
+  optional uint32 brakingForceLowLeft = 11; // [20,60] max regen force for the left brake. High value increases braking force.
+  optional uint32 brakingForceLowRight = 12; // see previous
+  optional uint32 brakingForceStandardLeft = 13; // see previous
+  optional uint32 brakingForceStandardRight = 14; // see previous
+  optional uint32 brakingForceHighLeft = 15; // see previous
+  optional uint32 brakingForceHighRight = 16; // see previous
+  optional BrakingForceLevel brakingForceLevel = 17;
+  optional uint32 maxBrakingCurrent = 18; //[20,60] max regen braking force in total for example if brakingForce*={20,20} and maxBrakingCurrent=30 if whee presse on 2 brake current is 30A not 40A
+
+  // brakes calibration
+  optional uint32 brake0PositionLeft = 19; //[0,255] calibration of brake handle possition position.
+  optional uint32 brake0PositionRight = 20; // see previous
+  optional uint32 brakeScallLeft = 21; // [0,255] calibration of brake handle travel set it to 0 for run calibration (watch screen for calibration) position. 0 for left position, 1 for right.
+  optional uint32 brakeScallRight = 22; // see previous
+
+  // pedaling hardness
+  optional uint32 pedalingPulseToRpm10 = 23; //[1,255] reduction ratio  =34 sur yak peut ètre utilisé pour s'adapter a d'autres vehicule type radkutche.
+  optional uint32 pedalingHardnessLow = 24; //[0,255] how hard is the torque of regen
+  optional uint32 pedalingHardnessStandard = 25; //[0,255] how hard is the torque of regen
+  optional uint32 pedalingHardnessHigh = 26; //[0,255] how hard is the torque of regen
+  optional PedalingHardnessLevel pedalingHardnessLevel = 27;
+  optional uint32 pedalingHardnessStartSpeed = 28; //[0,100] under this value regen has no torque
+  optional uint32 pedalingHardnessPow100 = 29;//[50,200] 100 = regen torque is linear with pedal speed 120 => tork = pedal speed^1.2
+  optional uint32 testMode = 30;//[0,2] 0=normal, 1 = screen show status of bike (brake adc value) and VESC bridge is enable we can configure vesc with BLE) ,2=futur use
+  optional uint32 limitUbat100p3 = 31;//[80,130]//80 = limit charge to (3+80/100)=3.80, 120=limit charge to (3+120/100), change the limite on buig berta if tiny bms limite is is reached tiny bms stop charge
+
+  // easy-start
+  optional bool easyStartEnabled = 32;//easy start enable a mode at low speed the crankset are arde and increas power in motor
+  optional uint32 starterEndSpeed10 = 33; //[0,255] = use for easy start limit speed for end of easy start (50=5km/h but in real is less)
+  optional uint32 fullStarterSpeed10 = 34; //[0,255] = under this value easy start are at full power (10=1km/h)
+  optional uint32 starterPowerMultiplier = 35; //[0,30] easy start motorcurrent multiplier (10=current during easy start = 10x current in normal mode for same PAS speed
+
+  optional uint32 socOffset = 36; //[0,50] show soc with a offset show socScall100
+  optional uint32 socScall100 = 37; //[50,200] multiplier for SOC SOC show to user = (SOC-socOffset)*(socScall100/100.0)
+  optional KeyMode keymode = 38; //mod for stark bick use key bluetooth ...
+  optional uint32 bleKeyTimeout = 39; //[2,36000(10h)]if bluetooth key is use after how many time in seconde is turn off if ble no send unlock;
+  optional uint64 time = 40; //for write time to bike [unix time in ms]
+  optional bool reverseLightWarning = 41; //enable warning when bike run reverse
+  optional bool reverseBuzzerWarning = 42; //enable buzzer when bike run reverse //not implemented yet
+  optional bool blinkSound = 43; //enable buzzer when bike run reverse //not implemented yet
+  optional uint32 batteryCappasityma = 44; //cappasity of battery mount on bike in mA
+  optional uint32 nbCellBattery = 45;//nb cell in serial mount on bike 
+  optional string vin = 46; //serial number of bike exemple TASHEY220001 currently 12 char but we can go up to 14
+  optional bool enableMoteurLeft = 47; //enable moteur Left can be disable if it is broken
+  optional bool enableMoteurRight = 48; //enable moteur Right can be disable if it is broken
+  optional bool enableAutoBreak = 49; //enable moteur Right can be disable if it is broken
+}
+
+message BmsLight {
+  optional uint32 soc = 1; // state of charge, from 0 to 100, in %
+  optional uint32 totalTraveledDistanceMeters = 2; //in [m]
+  optional uint32 tripTraveledDistanceMeters = 3; //in [m] distance since start-up (reset to 0 when turn bike on)
+  optional uint32 chargingTimeSeconds = 4; // how many seconds before bike is full charged. If bike is not in charge this value is not set.
+  optional uint32 remainingRangeMeters = 5; //estimate of distance in [m] we can travel before battery is empty
+  optional bool on=6;//bike is ON
+}
