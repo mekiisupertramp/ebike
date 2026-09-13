@@ -2,7 +2,7 @@
 #define _CONFIGCONFIG_H_
 
 #include "stdint.h"
-#include "tracy.h"
+#include "iot.h"
 #include "protocol.pb-c.h"
 
 #define MAX_NAME_LENGTH 11

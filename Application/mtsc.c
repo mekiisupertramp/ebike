@@ -77,7 +77,7 @@
 #include "vesc_can.h"
 #include "bootLoader.h"
 #include "W25N01GV_driver.h"
-#include "tracy.h"
+#include "iot.h"
 #include "screen.h"
 
 #include "simple_peripheral.h"
@@ -286,7 +286,7 @@ void controlThread(UArg a0, UArg a1)
     float tork=0.0;
     float current=0.0;
     float brakeCur=0.0;
-    volatile uint16_t cptTracy=0;
+    volatile uint16_t cptIot=0;
     volatile uint16_t cptLock=0; // count to 6000 (30 secondes)
     bool unlockBLE=0;
     float trig=0.0;
@@ -306,7 +306,7 @@ void controlThread(UArg a0, UArg a1)
     vescInit();
     init_tiny_BMS();
     configInit();
-    tracy_init();
+    iot_init();
 
 
     for(int l=0;l<5;l++)
@@ -339,7 +339,7 @@ void controlThread(UArg a0, UArg a1)
         b--;
     }
     //char req = 5;
-    //    while(!isTracyConnected() && req>0){
+    //    while(!isIotConnected() && req>0){
     //        requestPing();
     //        sleepy(100);
     //        req--;
@@ -492,7 +492,7 @@ void controlThread(UArg a0, UArg a1)
                 unlockBLE=0;
                 vCtrl.mode = WELCOME;
             }else{
-                if(isTracyConnected()){
+                if(isIotConnected()){
                     if(rfidReceived){
                         rfidReceived = false;
                         if(isRfidOK()){
@@ -507,11 +507,11 @@ void controlThread(UArg a0, UArg a1)
                         }
                     }
                 }else{
-                    cptTracy++;
+                    cptIot++;
                     //requestPing();
-                    if(cptTracy>1500){ // try to detect tracy during 8 seconds
+                    if(cptIot>1500){ // try to detect IoT during 8 seconds
                         vCtrl.mode = WELCOME;
-                        cptTracy=0;
+                        cptIot=0;
                     }
                 }
             }
@@ -523,7 +523,7 @@ void controlThread(UArg a0, UArg a1)
             movingAverageTork(0.0);
             //ClockP_sleep(1);
             cptLock=0;
-            cptTracy=0;
+            cptIot=0;
             unlockBLE=0;
             //                ClockP_usleep(100000);
             break;
@@ -805,7 +805,7 @@ void periodicTask(UArg a0, UArg a1){
         test++;
         GPIO_write(LED,(test/2)%2);
 
-        if(!isTracyConnected()){
+        if(!isIotConnected()){
             requestPing();
         }else{
             if(!ccidReceived){
