@@ -1,12 +1,12 @@
 /*
- * tracy.h
+ * iot.h
  *
  *  Created on: 24 Jan 2023
  *      Author: mehmedblazevic
  */
 
-#ifndef APPLICATION_TRACY_H_
-#define APPLICATION_TRACY_H_
+#ifndef APPLICATION_IOT_H_
+#define APPLICATION_IOT_H_
 
 #include "string.h"
 #include "stdbool.h"
@@ -51,7 +51,7 @@ extern bool resetOdo;
 
 #define RFID_ID_LENGTH 11 //length of RFID id in Byte
 
-void tracy_init();
+void iot_init();
 void saveBikeDatas();
 void eraseBikeDatas();
 void updateDatasCharacteristique();
@@ -59,9 +59,9 @@ void updateDatasCharacteristique();
 void requestPing();
 bool isRfidOK();
 void requestCcid();
-bool isTracyConnected();
-void resetTracyConn();
+bool isIotConnected();
+void resetIotConn();
 void convStrToHexArray(char* hexArray, char* strArray, uint8_t n);
-void tracy_manage_comm(can_t msg);
+void iot_manage_comm(can_t msg);
 
-#endif /* APPLICATION_TRACY_H_ */
+#endif /* APPLICATION_IOT_H_ */

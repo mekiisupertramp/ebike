@@ -1,11 +1,11 @@
 /*
- * tracy.c
+ * Iot.c
  *
  *  Created on: 24 Jan 2023
  *      Author: mehmedblazevic
  */
 
-#include "tracy.h"
+#include "iot.h"
 #include "datasService.h"
 #include <ti/drivers/NVS.h>
 #include "simple_peripheral.h"
@@ -34,7 +34,7 @@ bool powerChanged=0;
 bool dateChanged=0;
 bool rfidReceived=0;
 bool ccidReceived=0;
-bool tracyConnected=0;
+bool iotConnected=0;
 bool resetOdo=0;
 
 // Declaration of service callback handlers
@@ -52,10 +52,10 @@ static datasServiceCBs_t user_datasServiceCBs =
 NVS_Handle nvsHandle; //nvs for store datas
 NVS_Attrs regionAttrs;
 
-void tracy_init(){
+void iot_init(){
     bikeDatas=defautlDatas;
     DatasService_RegisterAppCBs(&user_datasServiceCBs);
-	canRegistreCallBack(0,tracy_manage_comm);
+	canRegistreCallBack(0,iot_manage_comm);
 
     updateDatasCharacteristique();
 }
@@ -189,12 +189,12 @@ bool isRfidOK(){
     }
     return false;
 }
-bool isTracyConnected(){
+bool isIotConnected(){
 //    bikeDatas.trackerPresent=1;
-    return tracyConnected;
+    return iotConnected;
 }
-void resetTracyConn(){
-    tracyConnected=false;
+void resetIotConn(){
+    iotConnected=false;
     rfidReceived=false;
 }
 void requestCcid(){
@@ -221,11 +221,11 @@ void sleepyy(int ms){
         ms--;
     }
 }
-void tracy_manage_comm(can_t msg){
+void iot_manage_comm(can_t msg){
     can_t resp;
     switch(msg.id){
         case GET_PING_ACK:
-            tracyConnected = true;
+            iotConnected = true;
         break;
         case SEND_ID_1:
             memcpy(rfid, msg.data, 8);

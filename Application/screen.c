@@ -77,7 +77,7 @@ void screenThread(UArg a0, UArg a1)
                 oldMode=NORMAL;
             break;
             case AUTHENT:
-                if(isTracyConnected()){
+                if(isIotConnected()){
                     if(oldMode != AUTHENT) {
                         img_Show(ilock);
                         oldMode = AUTHENT;

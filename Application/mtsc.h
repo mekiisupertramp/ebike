@@ -25,9 +25,9 @@ typedef struct{
     uint8_t realSpeed;
 }t_ctrlVehicle;
 
-// generic datas used for/by flash & tracy's system
+// generic datas used for/by flash & IoT system
 typedef struct{
-    bool ready; //datas from flash & tracy ready
+    bool ready; //datas from flash & IoT ready
     double kmTot;   // those 3 should be removed
     double tripA;
     double tripB;
