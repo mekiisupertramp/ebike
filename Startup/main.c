@@ -134,25 +134,6 @@ extern void AssertHandler(uint8 assertCause, uint8 assertSubcause);
 volatile int debug=0;
 int main()
 {
-    /*char test[]=
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "The sample code in the docs doesn't work for me. The resulting file isn't gunzip'able (fails with "
-            "unexpected end of file for me). Also, the API of that module isn't particularly well-suited for what"
-            " you're trying to do. It's more for working with streams rather than buffers, whereas the node-zlib "
-            "module has a simpler API that's easier to use for Buffers."
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "The sample code in the docs doesn't work for me. The resulting file isn't gunzip'able (fails with "
-            "unexpected end of file for me). Also, the API of that module isn't particularly well-suited for what"
-            " you're trying to do. It's more for working with streams rather than buffers, whereas the node-zlib "
-            "module has a simpler API that's easier to use for Buffers.";//839byte
-
-    char test2[1000];
-
-    volatile int length=compressToGzip(test, sizeof(test), test2, sizeof(test2));*/
-    //printf "\x1f\x8b\x08\x00\x00\x00\x00\x00" |cat - testflat |gzip -dc >/tmp/out
-
-
-
     //GPIO_write(LED, 0);
     /* Register Application callback to trap asserts raised in the Stack */
 
@@ -161,7 +142,7 @@ int main()
     debug=2;
     Board_initGeneral();
     SPI_init();
-    //ADC_init();
+    //ADC_init(); %%%%%%%%%%%%%%%%%%%%%%%%%%% -> not used ?!
     NVS_init();
     GPIO_init();
     UART_init();
@@ -169,7 +150,7 @@ int main()
     GPIO_enableInt(BRAKE_L);
     GPIO_enableInt(BRAKE_R);
     GPIO_enableInt(CONFIG_BTN_SCREEN);
-//    GPIO_enableInt(CONFIG_BTN_LIGHTS);
+//    GPIO_enableInt(CONFIG_BTN_LIGHTS); %%%%% -> not used ?!
     GPIO_enableInt(CONFIG_BTN_HELP);
 
     for(int l=0;l<2;l++)
